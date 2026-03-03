@@ -14,7 +14,7 @@
             color: #0f172a; 
             overflow-x: hidden;
         }
-        /* Custom Scrollbar */
+        
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 5px; }
@@ -30,7 +30,7 @@
             max-height: 450px; 
         }
         
-        /* Modern Glass UI Elements */
+       
         .glass-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
@@ -71,7 +71,7 @@
         }
         .stepper-item:last-child::after { content: none; }
 
-        /* Floating WhatsApp Button */
+        
         .float-wa {
             position: fixed;
             width: 60px;
@@ -95,27 +95,15 @@
             transform: scale(1.1);
         }
     </style>
-    <!-- Chosen Palette: Modern Tech Gradient (Slate background, crisp white glass cards, vibrant Blue/Purple gradients for accents to feel innovative and highly professional) -->
-    <!-- Application Structure Plan: Designed as an immersive student-to-student study guide.
-         1. Dynamic Hero: Clear branding for the student, course, and professor.
-         2. Detailed Importance Matrix: Expanded text using relatable student language.
-         3. Standards Deep Dive: Dual-view cards for Educational vs. Technical standards.
-         4. Applied Lab: Interactive examples showing how to build these resources.
-         5. Footer & Contact: Clear attribution and WhatsApp integration. -->
-    <!-- Visualization & Content Choices:
-         1. Bar Chart (Importance): Kept and restyled with gradients to show the contrast between old and new methods.
-         2. Radar Chart (Standards): Kept and restyled to visualize the necessary balance in design.
-         3. Interactive Steps/Tabs: To break down the heavy academic text into bite-sized, engaging pieces.
-         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. HTML/CSS entities used for icons. -->
 </head>
 <body class="bg-slate-50 antialiased selection:bg-purple-200 selection:text-purple-900">
 
-    <!-- Floating WhatsApp -->
+    
     <a href="https://wa.me/+201007753783" target="_blank" class="float-wa" title="تواصل مع مصطفى على واتساب">
         💬
     </a>
 
-    <!-- Navigation -->
+   
     <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-200/50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
@@ -136,7 +124,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    
     <header id="intro" class="relative overflow-hidden gradient-bg text-white py-24 sm:py-32">
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')]"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center gap-12">
@@ -170,7 +158,7 @@
         </div>
     </header>
 
-    <!-- Section 1: Importance -->
+    
     <section id="importance" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div class="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -z-10"></div>
         <div class="absolute bottom-0 left-0 w-64 h-64 bg-purple-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -z-10"></div>
@@ -184,7 +172,7 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <!-- Interactive Tabs -->
+            
             <div class="lg:col-span-7">
                 <div class="flex space-x-2 space-x-reverse mb-8 bg-slate-100 p-2 rounded-2xl overflow-x-auto">
                     <button onclick="switchTab('learner')" id="tab-learner" class="active-tab flex-1 py-3 px-4 rounded-xl font-bold transition whitespace-nowrap text-sm sm:text-base">👨‍🎓 فايدتها لينا (الطلاب)</button>
@@ -192,7 +180,7 @@
                     <button onclick="switchTab('system')" id="tab-system" class="flex-1 py-3 px-4 rounded-xl text-slate-600 font-bold hover:bg-white hover:shadow-sm transition whitespace-nowrap text-sm sm:text-base">🏢 فايدتها للكلية والمنظومة</button>
                 </div>
 
-                <!-- Tab 1: Learner -->
+              
                 <div id="content-learner" class="space-y-6 tab-content animate-fade-in">
                     <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
                         <div class="absolute top-0 right-0 w-2 h-full bg-blue-500 group-hover:w-full transition-all duration-300 opacity-10 group-hover:opacity-5"></div>
@@ -217,7 +205,7 @@
                     </div>
                 </div>
 
-                <!-- Tab 2: Teacher -->
+              
                 <div id="content-teacher" class="space-y-6 tab-content hidden animate-fade-in">
                     <div class="glass-card p-6 rounded-2xl">
                         <h3 class="font-black text-xl mb-3 text-blue-900">👨‍🏫 ترقية من "ملقن" لـ "مايسترو"</h3>
@@ -233,7 +221,7 @@
                     </div>
                 </div>
 
-                <!-- Tab 3: System -->
+               
                 <div id="content-system" class="space-y-6 tab-content hidden animate-fade-in">
                     <div class="glass-card p-6 rounded-2xl">
                         <h3 class="font-black text-xl mb-3 text-blue-900">🌍 العلم دليفري (تخطي الزمان والمكان)</h3>
@@ -250,7 +238,7 @@
                 </div>
             </div>
 
-            <!-- Chart Side -->
+            
             <div class="lg:col-span-5">
                 <div class="glass-card p-6 rounded-3xl sticky top-28">
                     <h3 class="font-black text-center mb-6 text-slate-800 text-xl">تحليل الأثر: التعليم التقليدي <span class="text-slate-400">ضد</span> التفاعلي</h3>
@@ -267,9 +255,9 @@
         </div>
     </section>
 
-    <!-- Section 2: Standards -->
+    
     <section id="standards" class="py-20 bg-slate-900 text-slate-200 border-y border-slate-800 relative overflow-hidden">
-        <!-- Abstract dark background shapes -->
+        
         <div class="absolute top-0 right-0 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20"></div>
 
@@ -283,7 +271,7 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-                <!-- Educational Standards -->
+                
                 <div class="bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 border border-slate-700 hover:border-blue-500 transition-colors">
                     <h3 class="text-2xl font-black mb-8 text-white flex items-center border-b border-slate-700 pb-4">
                         <span class="text-3xl ml-3">🧠</span> أولاً: المعايير التربوية (الأساس المتين)
@@ -320,7 +308,7 @@
                     </ul>
                 </div>
 
-                <!-- Technical Standards -->
+                
                 <div class="bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 border border-slate-700 hover:border-purple-500 transition-colors">
                     <h3 class="text-2xl font-black mb-8 text-white flex items-center border-b border-slate-700 pb-4">
                         <span class="text-3xl ml-3">🎨</span> ثانياً: المعايير الفنية (برمجتك وشياكتك)
@@ -358,7 +346,7 @@
                 </div>
             </div>
 
-            <!-- Radar Chart -->
+           
             <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 max-w-3xl mx-auto shadow-2xl">
                 <h3 class="font-black text-center mb-4 text-white text-xl">المعادلة الصعبة: مصدر مثالي <span class="text-slate-500">ضد</span> تصميم ضعيف</h3>
                 <div class="chart-container">
@@ -371,7 +359,7 @@
         </div>
     </section>
 
-    <!-- Section 3: Examples (The Lab) -->
+   
     <section id="examples" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
             <h2 class="text-4xl font-black text-slate-900 mb-6">٣/ تعالوا نشوف العملي بقى <span class="gradient-text">(أمثلة تطبيقية)</span></h2>
@@ -381,7 +369,7 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- E-Book Simulator -->
+           
             <div class="glass-card p-8 rounded-3xl">
                 <h3 class="text-2xl font-black mb-6 text-blue-900 border-b-2 border-blue-100 pb-4">📱 ١/ الكتاب الإلكتروني (مش مجرد PDF!)</h3>
                 <p class="text-slate-600 font-medium mb-8 leading-relaxed">
@@ -389,9 +377,9 @@
                 </p>
                 
                 <div class="bg-slate-900 p-4 rounded-[2rem] shadow-2xl border-[6px] border-slate-800 relative mx-auto max-w-sm transform hover:scale-105 transition-transform duration-500">
-                    <!-- Tablet Screen -->
+                   
                     <div class="bg-slate-50 rounded-[1.2rem] overflow-hidden flex flex-col relative h-[450px]">
-                        <!-- App Header -->
+                      
                         <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 flex justify-between items-center shadow-md z-10">
                             <span class="text-sm font-black">كتاب: أساسيات البرمجة</span>
                             <div class="flex space-x-2 space-x-reverse">
@@ -399,7 +387,7 @@
                                 <span class="w-3 h-3 rounded-full bg-white/30"></span>
                             </div>
                         </div>
-                        <!-- App Content -->
+                       
                         <div class="p-6 overflow-y-auto flex-1 relative">
                             <h4 class="font-black text-xl mb-3 text-slate-800">الخوارزميات</h4>
                             <p class="text-sm text-slate-600 leading-relaxed mb-6 font-medium">
@@ -408,7 +396,7 @@
                                 وتعتبر أساس أي برنامج ناجح.
                             </p>
                             
-                            <!-- Interactive Element Placeholders -->
+                            
                             <div class="grid grid-cols-2 gap-3 mb-6">
                                 <div class="bg-white rounded-xl p-4 text-center border border-slate-200 shadow-sm cursor-pointer hover:border-blue-500 hover:shadow-md transition-all group">
                                     <span class="text-3xl block mb-2 transition-transform group-hover:scale-110">▶️</span>
@@ -429,7 +417,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- App Footer Tools -->
+                       
                         <div class="bg-white p-3 flex justify-around border-t border-slate-200 shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] z-10">
                             <button class="text-xl text-slate-400 hover:text-blue-600 transition hover:-translate-y-1">🔍</button>
                             <button class="text-xl text-slate-400 hover:text-blue-600 transition hover:-translate-y-1">🖊️</button>
@@ -439,7 +427,7 @@
                 </div>
             </div>
 
-            <!-- Instructional Package Journey -->
+            
             <div class="glass-card p-8 rounded-3xl h-full">
                 <h3 class="text-2xl font-black mb-6 text-purple-900 border-b-2 border-purple-100 pb-4">🧰 ٢/ الحقيبة التعليمية (شنطة الإسعافات!)</h3>
                 <p class="text-slate-600 font-medium mb-8 leading-relaxed">
@@ -447,31 +435,31 @@
                 </p>
                 
                 <div class="relative pl-4 border-r-2 border-slate-100 mr-4">
-                    <!-- Step 1 -->
+              
                     <div class="mb-8 relative pr-8">
                         <div class="absolute w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center font-black right-[-21px] top-0 shadow-lg border-4 border-white">1</div>
                         <h4 class="font-black text-slate-800 text-lg mb-1">الدليل (Guide) 📖</h4>
                         <p class="text-sm text-slate-600 font-medium">الكتالوج بتاع الشنطة.. بيقولك الحقيبة دي عن إيه، وإزاي تستخدم محتوياتها خطوة بخطوة عشان متتوهش.</p>
                     </div>
-                    <!-- Step 2 -->
+                
                     <div class="mb-8 relative pr-8">
                         <div class="absolute w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center font-black right-[-21px] top-0 shadow-lg border-4 border-white">2</div>
                         <h4 class="font-black text-slate-800 text-lg mb-1">الأهداف (Objectives) 🎯</h4>
                         <p class="text-sm text-slate-600 font-medium">ده العقد اللي بينك وبين الحقيبة. بيقولك صراحة: "لما تخلص دراسة الشنطة دي، هتقدر تنفذ 1 و 2 و 3".</p>
                     </div>
-                    <!-- Step 3 -->
+                    
                     <div class="mb-8 relative pr-8">
                         <div class="absolute w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center font-black right-[-21px] top-0 shadow-lg border-4 border-white">3</div>
                         <h4 class="font-black text-slate-800 text-lg mb-1">الاختبار القبلي (Pre-test) 📝</h4>
                         <p class="text-sm text-slate-600 font-medium">امتحان سريع قبل ما تفتح أي حاجة عشان نحدد مستواك. لو درجتك عالية ممكن ننقلك لمستوى أعلى، ولو ضعيفة نوجهك للأساسيات.</p>
                     </div>
-                    <!-- Step 4 -->
+                    
                     <div class="mb-8 relative pr-8">
                         <div class="absolute w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-full flex items-center justify-center font-black right-[-25px] top-[-4px] shadow-lg shadow-purple-200 border-4 border-white animate-pulse">4</div>
                         <h4 class="font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 text-xl mb-1">الأنشطة والبدائل ⚙️</h4>
                         <p class="text-sm text-slate-600 font-bold bg-purple-50 p-3 rounded-lg border border-purple-100">القلب النابض! هنا بنديك طرق مختلفة تتعلم بيها وتختار اللي يريحك: تقرأ كتيب، أو تتفرج على CD، أو تشتغل عملي على ماكيت موجود جوة الحقيبة.</p>
                     </div>
-                    <!-- Step 5 -->
+                    
                     <div class="relative pr-8">
                         <div class="absolute w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center font-black right-[-21px] top-0 shadow-lg border-4 border-white">5</div>
                         <h4 class="font-black text-slate-800 text-lg mb-1">التقويم النهائي (Post-test) 🏆</h4>
@@ -488,7 +476,7 @@
         </a>
     </section>
 
-    <!-- Footer -->
+    
     <footer class="bg-slate-900 text-white pt-16 pb-8 border-t-[10px] border-blue-600 relative overflow-hidden">
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')]"></div>
         <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
@@ -524,34 +512,34 @@
 
 
     <script>
-        // Smooth Scroll
+        
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Tab Switching Logic
+
         function switchTab(tabId) {
-            // Hide all contents
+           
             document.querySelectorAll('.tab-content').forEach(el => {
                 el.classList.add('hidden');
-                el.classList.remove('animate-fade-in'); // reset animation
+                el.classList.remove('animate-fade-in');
             });
-            // Show selected content
+            
             const selectedContent = document.getElementById('content-' + tabId);
             selectedContent.classList.remove('hidden');
-            // Trigger reflow for animation
+            
             void selectedContent.offsetWidth; 
             selectedContent.classList.add('animate-fade-in');
             
-            // Reset tab styles
+            
             document.querySelectorAll('button[id^="tab-"]').forEach(btn => {
                 btn.className = "flex-1 py-3 px-4 rounded-xl text-slate-600 font-bold hover:bg-white hover:shadow-sm transition whitespace-nowrap text-sm sm:text-base";
             });
-            // Highlight active tab
+           
             document.getElementById('tab-' + tabId).className = "active-tab flex-1 py-3 px-4 rounded-xl font-bold transition whitespace-nowrap text-sm sm:text-base shadow-md";
         }
 
-        // Add simple fade-in keyframes dynamically
+       
         const style = document.createElement('style');
         style.textContent = `
             @keyframes fadeIn {
@@ -564,23 +552,23 @@
         `;
         document.head.appendChild(style);
 
-        // --- Charts Initialization ---
+        
         document.addEventListener('DOMContentLoaded', function() {
             
             Chart.defaults.font.family = "'Cairo', sans-serif";
-            Chart.defaults.color = '#64748b'; // slate-500
+            Chart.defaults.color = '#64748b'; 
 
-            // 1. Importance Bar Chart
+            
             const ctxImportance = document.getElementById('importanceChart').getContext('2d');
             
-            // Create gradients for bars
+            
             const gradientOld = ctxImportance.createLinearGradient(0, 0, 0, 400);
-            gradientOld.addColorStop(0, '#94a3b8'); // slate-400
-            gradientOld.addColorStop(1, '#cbd5e1'); // slate-300
+            gradientOld.addColorStop(0, '#94a3b8'); 
+            gradientOld.addColorStop(1, '#cbd5e1'); 
 
             const gradientNew = ctxImportance.createLinearGradient(0, 0, 0, 400);
-            gradientNew.addColorStop(0, '#3b82f6'); // blue-500
-            gradientNew.addColorStop(1, '#8b5cf6'); // violet-500
+            gradientNew.addColorStop(0, '#3b82f6'); 
+            gradientNew.addColorStop(1, '#8b5cf6'); 
 
             new Chart(ctxImportance, {
                 type: 'bar',
@@ -612,7 +600,7 @@
                             labels: { font: { weight: 'bold', size: 13 }, padding: 20 } 
                         },
                         tooltip: { 
-                            backgroundColor: 'rgba(15, 23, 42, 0.9)', // slate-900
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)', 
                             titleFont: { size: 14, weight: 'bold' },
                             bodyFont: { size: 13 },
                             padding: 12,
@@ -628,7 +616,7 @@
                         y: { 
                             beginAtZero: true, 
                             max: 100, 
-                            grid: { color: '#f1f5f9', drawBorder: false }, // slate-100
+                            grid: { color: '#f1f5f9', drawBorder: false }, 
                             ticks: { font: { weight: 'bold' } } 
                         },
                         x: { 
@@ -642,7 +630,7 @@
                 }
             });
 
-            // 2. Standards Radar Chart
+            
             const ctxStandards = document.getElementById('standardsChart').getContext('2d');
             new Chart(ctxStandards, {
                 type: 'radar',
@@ -652,7 +640,7 @@
                         label: 'شغل أخصائي محترف (مثالي)',
                         data: [100, 100, 90, 95, 85, 95],
                         fill: true,
-                        backgroundColor: 'rgba(59, 130, 246, 0.25)', // blue transparent
+                        backgroundColor: 'rgba(59, 130, 246, 0.25)', 
                         borderColor: '#3b82f6',
                         borderWidth: 3,
                         pointBackgroundColor: '#3b82f6',
@@ -665,7 +653,7 @@
                         label: 'شغل أي كلام (ضعيف)',
                         data: [40, 60, 30, 20, 40, 10],
                         fill: true,
-                        backgroundColor: 'rgba(226, 232, 240, 0.3)', // slate transparent
+                        backgroundColor: 'rgba(226, 232, 240, 0.3)', 
                         borderColor: '#94a3b8',
                         borderWidth: 2,
                         pointBackgroundColor: '#94a3b8',
@@ -681,7 +669,7 @@
                     plugins: {
                         legend: { 
                             position: 'bottom', 
-                            labels: { color: '#e2e8f0', font: { weight: 'bold' } } // light text for dark bg
+                            labels: { color: '#e2e8f0', font: { weight: 'bold' } } 
                         },
                         tooltip: {
                             backgroundColor: 'rgba(255, 255, 255, 0.95)',
@@ -695,7 +683,7 @@
                     },
                     scales: {
                         r: {
-                            angleLines: { color: '#334155' }, // slate-700
+                            angleLines: { color: '#334155' }, 
                             grid: { color: '#334155' },
                             suggestedMin: 0,
                             suggestedMax: 100,
@@ -703,7 +691,7 @@
                                 color: '#94a3b8', 
                                 font: { size: 12, weight: 'bold' } 
                             },
-                            ticks: { display: false } // Hide inner numbers for cleaner look
+                            ticks: { display: false } 
                         }
                     }
                 }
@@ -713,3 +701,4 @@
 </body>
 
 </html>
+
