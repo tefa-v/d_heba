@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الجزء الثالث | مستحدثات مصادر التعلم | مصطفى عبدالرحمن</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Dark Mode Scrollbar adjustments */
+        .dark-section ::-webkit-scrollbar-track { background: #0f172a; }
+        .dark-section ::-webkit-scrollbar-thumb { background: #3b82f6; }
+
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            max-width: 600px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            height: 350px; 
+            max-height: 450px; 
+        }
+        
+        /* Light Glass Card */
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-card-light:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        /* Dark Glass Card */
+        .glass-card-dark {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        .glass-card-dark:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.3);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .gradient-text-light {
+            background: linear-gradient(135deg, #2563eb, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-text-dark {
+            background: linear-gradient(135deg, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Floating WhatsApp Button */
+        .float-wa {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            left: 40px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0px 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        .float-wa:hover {
+            transform: scale(1.1);
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-indigo-500/30 selection:text-indigo-900 bg-slate-50">
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/+201007753783" target="_blank" class="float-wa" title="تواصل مع مصطفى عبدالرحمن">💬</a>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex flex-col">
+                    <span class="text-2xl font-black tracking-tight gradient-text-light">تكنولوجيا التعليم (الجزء الثالث)</span>
+                    <span class="text-xs font-bold text-slate-500">تصميم وإعداد: مصطفى عبدالرحمن</span>
+                </div>
+                <div class="hidden lg:flex space-x-8 space-x-reverse items-center">
+                    <button onclick="scrollToSection('requirements')" class="text-slate-600 hover:text-blue-600 font-bold transition">المتطلبات الأساسية</button>
+                    <button onclick="scrollToSection('patterns')" class="text-slate-600 hover:text-blue-600 font-bold transition">أنماط الاستخدام</button>
+                    <button onclick="scrollToSection('innovations')" class="text-slate-600 hover:text-blue-600 font-bold transition">فلسفة المستحدثات</button>
+                    <button onclick="scrollToSection('standards')" class="text-slate-600 hover:text-blue-600 font-bold transition">معايير الاعتماد</button>
+                    <div class="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-black border border-indigo-100 shadow-sm">
+                        كود: 25180235
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section (Dark Mode) -->
+    <header class="relative overflow-hidden pt-16 pb-32 bg-slate-900 text-white dark-section">
+        <!-- Back Button -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 mb-8">
+            <button onclick="window.history.back()" class="inline-flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 backdrop-blur-md border border-slate-600 text-slate-200 px-6 py-3 rounded-full font-bold transition-all shadow-lg hover:shadow-xl transform hover:-translate-x-2">
+                <span class="text-xl">🔙</span> <span>رجوع للصفحة السابقة</span>
+            </button>
+        </div>
+
+        <div class="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-indigo-600 rounded-full mix-blend-screen filter blur-[150px] opacity-30 animate-pulse"></div>
+        <div class="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-purple-600 rounded-full mix-blend-screen filter blur-[150px] opacity-20"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center text-center fade-in">
+            <div class="inline-block bg-white/10 backdrop-blur-md px-6 py-2 rounded-full text-sm font-bold mb-8 border border-white/20 text-indigo-200">
+                🚀 المرحلة المتقدمة: مستقبل تكنولوجيا التعليم
+            </div>
+            <h1 class="text-5xl md:text-6xl font-black mb-6 leading-tight">
+                المستحدثات التكنولوجية <br>
+                <span class="gradient-text-dark">ومتطلبات توظيفها باحترافية</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed font-medium max-w-3xl mx-auto">
+                أهلاً بكم يا شباب في الجزء الثالث والأخير. هنا هننتقل من مرحلة "الأساسيات" لمرحلة "الاحتراف الأكاديمي". 
+                هنعرف إزاي نهيئ البيئة بالكامل عشان التكنولوجيا تشتغل صح، وإزاي نرتب قاعاتنا، ونفهم يعني إيه "مستحدث تعليمي" حقيقي بالمعايير الدقيقة المكونة من ٨ نقاط أساسية.
+            </p>
+            <button onclick="scrollToSection('requirements')" class="bg-white text-slate-900 hover:bg-slate-100 font-black py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-[0_10px_30px_rgba(255,255,255,0.2)]">
+                ابدأ المذاكرة التفصيلية 👇
+            </button>
+        </div>
+    </header>
+
+    <!-- 1/ المتطلبات (Light Mode) -->
+    <section id="requirements" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative bg-slate-50">
+        <div class="text-center max-w-4xl mx-auto mb-16 fade-in">
+            <h2 class="text-4xl font-black text-slate-900 mb-4">١/ متطلبات التوظيف الوظيفي الناجح</h2>
+            <p class="text-slate-600 text-lg font-bold leading-relaxed">
+                علشان التكنولوجيا متبقاش مجرد "ديكور" في الفصل، لازم نوفر ٨ متطلبات أساسية بتكمل بعضها زي التروس في المنظومة التعليمية:
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="glass-card-light p-6 rounded-2xl border-t-4 border-blue-500">
+                <div class="text-4xl mb-4 bg-blue-50 w-16 h-16 flex items-center justify-center rounded-xl">🔌</div>
+                <h3 class="font-black text-lg text-slate-800 mb-2">١. المتطلبات المادية</h3>
+                <p class="text-slate-600 text-sm font-medium">البنية التحتية من أجهزة وشاشات تفاعلية، توفر كهرباء مستقرة، وإنترنت سريع يغطي كافة القاعات.</p>
+            </div>
+            
+            <div class="glass-card-light p-6 rounded-2xl border-t-4 border-purple-500">
+                <div class="text-4xl mb-4 bg-purple-50 w-16 h-16 flex items-center justify-center rounded-xl">💻</div>
+                <h3 class="font-black text-lg text-slate-800 mb-2">٢. المتطلبات البرمجية</h3>
+                <p class="text-slate-600 text-sm font-medium">توفير الأنظمة (LMS)، والتطبيقات، وتراخيص البرامج الأصلية، والمحتوى الرقمي المطابق للمنهج الدراسي.</p>
+            </div>
+            
+            <div class="glass-card-light p-6 rounded-2xl border-t-4 border-emerald-500">
+                <div class="text-4xl mb-4 bg-emerald-50 w-16 h-16 flex items-center justify-center rounded-xl">👨‍🏫</div>
+                <h3 class="font-black text-lg text-slate-800 mb-2">٣. المتطلبات البشرية</h3>
+                <p class="text-slate-600 text-sm font-medium">تدريب المعلمين وتأهيلهم تقنياً، وتواجد أخصائي تكنولوجيا تعليم كفء لإدارة وتصميم المنظومة بالكامل.</p>
+            </div>
+            
+            <div class="glass-card-light p-6 rounded-2xl border-t-4 border-amber-500">
+                <div class="text-4xl mb-4 bg-amber-50 w-16 h-16 flex items-center justify-center rounded-xl">🏢</div>
+                <h3 class="font-black text-lg text-slate-800 mb-2">٤. المتطلبات الإدارية</h3>
+                <p class="text-slate-600 text-sm font-medium">دعم القيادة المدرسية، توفير الميزانيات، وتعديل الجدول الدراسي للسماح بوقت كافي لاستخدام المعامل.</p>
+            </div>
+            
+            <div class="glass-card-light p-6 rounded-2xl border-t-4 border-rose-500">
+                <div class="text-4xl mb-4 bg-rose-50 w-16 h-16 flex items-center justify-center rounded-xl">🎓</div>
+                <h3 class="font-black text-lg text-slate-800 mb-2">٥. استعداد المتعلم</h3>
+                <p class="text-slate-600 text-sm font-medium">تهيئة الطلاب لاستخدام الأجهزة للتعلم وليس للترفيه، وإكسابهم مهارات البحث الذاتي والتعلم الموجه.</p>
+            </div>
+            
+            <div class="glass-card-light p-6 rounded-2xl border-t-4 border-cyan-500">
+                <div class="text-4xl mb-4 bg-cyan-50 w-16 h-16 flex items-center justify-center rounded-xl">🛠️</div>
+                <h3 class="font-black text-lg text-slate-800 mb-2">٦. الدعم الفني والصيانة</h3>
+                <p class="text-slate-600 text-sm font-medium">خطة واضحة ومستمرة للصيانة الدورية، وإصلاح الأعطال المفاجئة فوراً لضمان عدم تعطل العملية التعليمية.</p>
+            </div>
+
+            <div class="glass-card-light p-6 rounded-2xl border-t-4 border-indigo-500 relative overflow-hidden">
+                <div class="absolute top-0 left-0 bg-indigo-500 text-white text-[10px] px-2 py-1 rounded-br-lg font-bold">إضافة هامة</div>
+                <div class="text-4xl mb-4 bg-indigo-50 w-16 h-16 flex items-center justify-center rounded-xl">🛡️</div>
+                <h3 class="font-black text-lg text-slate-800 mb-2">٧. المتطلبات الأمنية</h3>
+                <p class="text-slate-600 text-sm font-medium">تأمين الشبكات ضد الاختراق، وحماية بيانات الطلاب ودرجاتهم، وتوفير إنترنت آمن خالي من المحتوى الضار.</p>
+            </div>
+
+            <div class="glass-card-light p-6 rounded-2xl border-t-4 border-teal-500 relative overflow-hidden">
+                <div class="absolute top-0 left-0 bg-teal-500 text-white text-[10px] px-2 py-1 rounded-br-lg font-bold">إضافة هامة</div>
+                <div class="text-4xl mb-4 bg-teal-50 w-16 h-16 flex items-center justify-center rounded-xl">📈</div>
+                <h3 class="font-black text-lg text-slate-800 mb-2">٨. متطلبات التقويم</h3>
+                <p class="text-slate-600 text-sm font-medium">توفير أدوات وأنظمة ذكية تتيح قياس أثر هذه التكنولوجيا على استيعاب الطالب وإصدار تقارير أداء دورية.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2/ أنماط الاستخدام (Dark Mode) -->
+    <section id="patterns" class="py-24 bg-slate-900 text-white dark-section relative">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto mb-16 fade-in">
+                <h2 class="text-4xl font-black mb-4">٢/ أنماط الاستخدام الوظيفي لمصادر التعلم</h2>
+                <p class="text-slate-400 text-lg font-bold leading-relaxed">
+                    طريقة توزيعنا للطلاب مع المصدر بتفرق جداً في النتيجة الأكاديمية. كأخصائيين، عندنا ٨ أنماط رئيسية بنوظف بيها المصادر:
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Pattern 1 -->
+                <div class="glass-card-dark p-6 rounded-2xl group border-r-4 border-indigo-500 hover:bg-indigo-900/20">
+                    <h3 class="font-black text-lg text-indigo-400 mb-3 flex items-center gap-2"><span class="text-2xl">🏟️</span> النمط الجماهيري</h3>
+                    <p class="text-slate-300 text-sm font-medium leading-relaxed">عرض المصدر لأعداد ضخمة في نفس الوقت (مثل: العرض بالداتا شو في المدرج، أو القنوات التعليمية). يعيبه قلة التفاعل الفردي.</p>
+                </div>
+                <!-- Pattern 2 -->
+                <div class="glass-card-dark p-6 rounded-2xl group border-r-4 border-emerald-500 hover:bg-emerald-900/20">
+                    <h3 class="font-black text-lg text-emerald-400 mb-3 flex items-center gap-2"><span class="text-2xl">🎧</span> النمط الفردي</h3>
+                    <p class="text-slate-300 text-sm font-medium leading-relaxed">طالب واحد يتفاعل مع مصدر واحد بسرعته الخاصة (مثل: الحقائب التعليمية والمنصات الذكية). ممتاز لمراعاة الفروق الفردية.</p>
+                </div>
+                <!-- Pattern 3 -->
+                <div class="glass-card-dark p-6 rounded-2xl group border-r-4 border-amber-500 hover:bg-amber-900/20">
+                    <h3 class="font-black text-lg text-amber-400 mb-3 flex items-center gap-2"><span class="text-2xl">🤝</span> المجموعات الصغيرة</h3>
+                    <p class="text-slate-300 text-sm font-medium leading-relaxed">تقسيم الطلاب لمجموعات (٣-٥ أفراد) يتشاركون مصدراً واحداً للوصول لهدف مشترك. ينمي مهارات التواصل والعمل التعاوني.</p>
+                </div>
+                <!-- Pattern 4 -->
+                <div class="glass-card-dark p-6 rounded-2xl group border-r-4 border-blue-500 hover:bg-blue-900/20">
+                    <h3 class="font-black text-lg text-blue-400 mb-3 flex items-center gap-2"><span class="text-2xl">🌐</span> التشاركي الافتراضي</h3>
+                    <p class="text-slate-300 text-sm font-medium leading-relaxed">تواصل الطلاب عبر بيئات التعلم السحابية والفصول الافتراضية (Virtual Classrooms) لإنجاز مشاريع عن بُعد.</p>
+                </div>
+                <!-- Pattern 5 -->
+                <div class="glass-card-dark p-6 rounded-2xl group border-r-4 border-rose-500 hover:bg-rose-900/20">
+                    <h3 class="font-black text-lg text-rose-400 mb-3 flex items-center gap-2"><span class="text-2xl">⚖️</span> النمط المدمج (الهجين)</h3>
+                    <p class="text-slate-300 text-sm font-medium leading-relaxed">دمج التعليم التقليدي وجهاً لوجه مع التعليم الإلكتروني. جزء من الشرح في السكشن والجزء الآخر عبر المنصة (Blended Learning).</p>
+                </div>
+                <!-- Pattern 6 -->
+                <div class="glass-card-dark p-6 rounded-2xl group border-r-4 border-fuchsia-500 hover:bg-fuchsia-900/20">
+                    <h3 class="font-black text-lg text-fuchsia-400 mb-3 flex items-center gap-2"><span class="text-2xl">🏆</span> النمط التنافسي</h3>
+                    <p class="text-slate-300 text-sm font-medium leading-relaxed">استخدام التلعيب (Gamification) ومسابقات الكويزات التفاعلية لخلق جو من التنافس الإيجابي وكسر ملل السكشن.</p>
+                </div>
+                <!-- Pattern 7 -->
+                <div class="glass-card-dark p-6 rounded-2xl group border-r-4 border-cyan-500 hover:bg-cyan-900/20">
+                    <h3 class="font-black text-lg text-cyan-400 mb-3 flex items-center gap-2"><span class="text-2xl">🔄</span> الفصل المقلوب</h3>
+                    <p class="text-slate-300 text-sm font-medium leading-relaxed">الطالب يدرس المحتوى (الفيديو/المصدر) في المنزل بمفرده، ويأتي للسكشن للتطبيق العملي والمناقشة مع المعلم (Flipped Classroom).</p>
+                </div>
+                <!-- Pattern 8 -->
+                <div class="glass-card-dark p-6 rounded-2xl group border-r-4 border-orange-500 hover:bg-orange-900/20">
+                    <h3 class="font-black text-lg text-orange-400 mb-3 flex items-center gap-2"><span class="text-2xl">🎯</span> النمط الموجه</h3>
+                    <p class="text-slate-300 text-sm font-medium leading-relaxed">المعلم يتحكم في الشاشات والأجهزة الخاصة بالطلاب من خلال جهازه الرئيسي، لضمان توجيه انتباههم لنقطة محددة معاً.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3/ مفهوم المستحدثات (Light Mode) -->
+    <section id="innovations" class="py-24 bg-slate-50 border-t border-slate-200 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 fade-in">
+                    <div class="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 border border-indigo-200 px-4 py-2 rounded-full text-sm font-bold mb-6">
+                        الفلسفة الحقيقية وراء التكنولوجيا التعليمية
+                    </div>
+                    <h2 class="text-4xl font-black text-slate-900 mb-6 leading-tight">
+                        ٣/ يعني إيه <span class="gradient-text-light">"مستحدثات"</span> مصادر التعلم؟
+                    </h2>
+                    <p class="text-slate-600 font-bold text-lg mb-6 leading-relaxed">
+                        المستحدثات (Innovations) مش مجرد شراء أجهزة حديثة وتكديسها في الفصول! المفهوم الأكاديمي السليم بيقوم على ٨ ركائز أساسية تضمن فعالية العملية التعليمية:
+                    </p>
+                    
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <li class="glass-card-light p-4 rounded-xl flex items-start gap-3">
+                            <span class="text-indigo-600 font-black text-xl">١</span>
+                            <div class="text-sm"><strong class="text-slate-800 block mb-1">التكامل الذكي:</strong> دمج أحدث التقنيات مع نظريات التصميم التعليمي.</div>
+                        </li>
+                        <li class="glass-card-light p-4 rounded-xl flex items-start gap-3">
+                            <span class="text-indigo-600 font-black text-xl">٢</span>
+                            <div class="text-sm"><strong class="text-slate-800 block mb-1">التفاعلية الفائقة:</strong> نقل الطالب لمرحلة المشاركة والتفاعل اللحظي النشط.</div>
+                        </li>
+                        <li class="glass-card-light p-4 rounded-xl flex items-start gap-3">
+                            <span class="text-indigo-600 font-black text-xl">٣</span>
+                            <div class="text-sm"><strong class="text-slate-800 block mb-1">تجاوز الزمان والمكان:</strong> إتاحة التعلم المستمر عبر الحوسبة السحابية.</div>
+                        </li>
+                        <li class="glass-card-light p-4 rounded-xl flex items-start gap-3">
+                            <span class="text-indigo-600 font-black text-xl">٤</span>
+                            <div class="text-sm"><strong class="text-slate-800 block mb-1">التكيف والتشخيص:</strong> قدرة الأنظمة على تحليل مستوى الطالب والتكيف معه.</div>
+                        </li>
+                        <li class="glass-card-light p-4 rounded-xl flex items-start gap-3">
+                            <span class="text-indigo-600 font-black text-xl">٥</span>
+                            <div class="text-sm"><strong class="text-slate-800 block mb-1">التحديث المستمر:</strong> سهولة تحديث المحتوى الرقمي دون إهدار للوقت.</div>
+                        </li>
+                        <li class="glass-card-light p-4 rounded-xl flex items-start gap-3">
+                            <span class="text-indigo-600 font-black text-xl">٦</span>
+                            <div class="text-sm"><strong class="text-slate-800 block mb-1">التنوع الوسائطي:</strong> استخدام نسيج متكامل من الصور، والصوت، والـ 3D.</div>
+                        </li>
+                        <li class="glass-card-light p-4 rounded-xl flex items-start gap-3 bg-indigo-50/50">
+                            <span class="text-indigo-600 font-black text-xl">٧</span>
+                            <div class="text-sm"><strong class="text-slate-800 block mb-1">التعلم المصغر (Microlearning):</strong> تقديم المعلومات في كبسولات سريعة ومكثفة لتجنب التشتت.</div>
+                        </li>
+                        <li class="glass-card-light p-4 rounded-xl flex items-start gap-3 bg-indigo-50/50">
+                            <span class="text-indigo-600 font-black text-xl">٨</span>
+                            <div class="text-sm"><strong class="text-slate-800 block mb-1">التحليلات التعليمية:</strong> تتبع كل نقرة للطالب لجمع بيانات دقيقة عن سلوكه ونقاط ضعفه.</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="lg:w-1/2 w-full">
+                    <div class="bg-white p-8 rounded-[3rem] shadow-2xl border border-slate-100 flex flex-col items-center justify-center aspect-square relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-blue-50 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="relative z-10 text-center">
+                            <div class="text-6xl mb-6">🧠 ➕ 💻</div>
+                            <h3 class="font-black text-3xl text-slate-800 mb-4">معادلة المستحدث الناجح</h3>
+                            <div class="bg-white/80 p-4 rounded-2xl shadow-sm border border-slate-200">
+                                <p class="text-slate-700 font-bold text-lg">تكنولوجيا حديثة</p>
+                                <p class="text-indigo-500 font-black my-1">+</p>
+                                <p class="text-slate-700 font-bold text-lg">نظرية تصميم تعليمي</p>
+                                <p class="text-emerald-500 font-black my-1">=</p>
+                                <p class="text-emerald-700 font-black text-xl">بيئة تعلم مبتكرة وفعالة</p>
+                            </div>
+                        </div>
+                        <div class="absolute w-[120%] h-[120%] border-[20px] border-indigo-50 rounded-full animate-[spin_20s_linear_infinite]"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4/ معايير التوفر (Dark Mode) -->
+    <section id="standards" class="py-24 bg-slate-950 text-white dark-section relative overflow-hidden">
+        <!-- Abstract BG -->
+        <div class="absolute right-0 bottom-0 w-full h-full bg-gradient-to-t from-indigo-950/40 to-transparent pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-black mb-6">٤/ شروط الاعتماد الأكاديمي <br><span class="gradient-text-dark text-3xl">(المعايير التي يجب توفرها في المستحدثات)</span></h2>
+                <p class="text-slate-400 text-lg font-medium leading-relaxed">
+                    علشان نعتمد أي تقنية جديدة ونقول عليها "مستحدث تعليمي ناجح"، لازم تعدي على ٨ فلاتر (معايير) صارمة، وده اللي بيفرق الشغل الاحترافي في جامعتنا عن الشغل العشوائي:
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Standards List -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="glass-card-dark p-5 rounded-2xl flex flex-col gap-3 hover:border-indigo-500">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-indigo-500/20 text-indigo-400 w-10 h-10 flex items-center justify-center rounded-lg font-black text-lg">١</div>
+                            <strong class="text-white">المعيار التربوي (الأهداف)</strong>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">أن يخدم أهدافاً تعليمية واضحة ويدعم النظريات التربوية المعتمدة.</p>
+                    </div>
+                    
+                    <div class="glass-card-dark p-5 rounded-2xl flex flex-col gap-3 hover:border-blue-500">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-blue-500/20 text-blue-400 w-10 h-10 flex items-center justify-center rounded-lg font-black text-lg">٢</div>
+                            <strong class="text-white">المعيار التكنولوجي (السهولة)</strong>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">العمل بكفاءة على مختلف الأجهزة، بواجهة استخدام بديهية وسهلة.</p>
+                    </div>
+
+                    <div class="glass-card-dark p-5 rounded-2xl flex flex-col gap-3 hover:border-emerald-500">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-emerald-500/20 text-emerald-400 w-10 h-10 flex items-center justify-center rounded-lg font-black text-lg">٣</div>
+                            <strong class="text-white">المعيار الأمني (الخصوصية)</strong>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">تشفير قوي لحماية بيانات الطلاب ودرجاتهم من الاختراق أو التسريب.</p>
+                    </div>
+
+                    <div class="glass-card-dark p-5 rounded-2xl flex flex-col gap-3 hover:border-amber-500">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-amber-500/20 text-amber-400 w-10 h-10 flex items-center justify-center rounded-lg font-black text-lg">٤</div>
+                            <strong class="text-white">المعيار الاقتصادي (الجدوى)</strong>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">عائد تعليمي يفوق التكلفة، وإمكانية التوسع (Scalability) بأقل تكلفة.</p>
+                    </div>
+
+                    <div class="glass-card-dark p-5 rounded-2xl flex flex-col gap-3 hover:border-rose-500">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-rose-500/20 text-rose-400 w-10 h-10 flex items-center justify-center rounded-lg font-black text-lg">٥</div>
+                            <strong class="text-white">المعيار الجمالي (التصميم)</strong>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">مراعاة أسس التصميم البصري لضمان راحة العين وعدم تشتيت الانتباه.</p>
+                    </div>
+
+                    <div class="glass-card-dark p-5 rounded-2xl flex flex-col gap-3 hover:border-cyan-500">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-cyan-500/20 text-cyan-400 w-10 h-10 flex items-center justify-center rounded-lg font-black text-lg">٦</div>
+                            <strong class="text-white">المعيار التقويمي (القياس)</strong>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">أدوات لتتبع الأداء، قياس التقدم، وإصدار تقارير تحليلية دقيقة.</p>
+                    </div>
+
+                    <div class="glass-card-dark p-5 rounded-2xl flex flex-col gap-3 hover:border-fuchsia-500 border-l-2 border-fuchsia-500/50">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-fuchsia-500/20 text-fuchsia-400 w-10 h-10 flex items-center justify-center rounded-lg font-black text-lg">٧</div>
+                            <strong class="text-white">المعيار الأخلاقي</strong>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">خلو المحتوى من أي تحيز أو عنصرية، واحترام حقوق الملكية الفكرية.</p>
+                    </div>
+
+                    <div class="glass-card-dark p-5 rounded-2xl flex flex-col gap-3 hover:border-teal-500 border-l-2 border-teal-500/50">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-teal-500/20 text-teal-400 w-10 h-10 flex items-center justify-center rounded-lg font-black text-lg">٨</div>
+                            <strong class="text-white">معيار إمكانية الوصول</strong>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">دعم ذوي الهمم (Accessibility) كقارئات الشاشة للمكفوفين وتكبير الخطوط.</p>
+                    </div>
+                </div>
+
+                <!-- Radar Chart -->
+                <div class="glass-card-dark p-8 rounded-[3rem] h-full flex flex-col justify-center border border-slate-700">
+                    <h4 class="text-center font-black text-white text-2xl mb-2">تحليل جودة المستحدث التعليمي</h4>
+                    <p class="text-center text-sm text-slate-400 mb-8">تقييم المستحدث بناءً على المعايير المحورية</p>
+                    <div class="chart-container flex-1">
+                        <canvas id="standardsRadarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer with WhatsApp CTA -->
+    <footer class="bg-slate-950 text-white pt-20 pb-10 border-t-[10px] border-indigo-600">
+        <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-black mb-6 gradient-text-dark">
+                كده المنهج كله بقى واضح واحترافي! 🎉
+            </h2>
+            <p class="text-slate-400 mb-10 font-semibold text-lg max-w-3xl mx-auto">
+                أتمنى التلخيص ده يسهل عليكم المذاكرة وتكونوا فهمتوا فلسفة المادة مش بس حفظتوها. تخصصنا ده هو المحرك الأساسي لمستقبل التعليم، وإحنا قادة التغيير ده.
+            </p>
+            
+            <div class="glass-card-dark border border-slate-800 p-8 rounded-[3rem] max-w-2xl mx-auto mb-12 shadow-2xl">
+                <p class="text-slate-500 text-sm font-bold mb-3 tracking-wider">تم التصميم والإعداد بواسطة زميلكم:</p>
+                <h3 class="text-3xl font-black text-white mb-4">مصطفى عبدالرحمن صلاح (تيفا)</h3>
+                <div class="flex flex-wrap justify-center items-center gap-4 text-sm font-bold mt-4">
+                    <span class="bg-indigo-900/30 text-indigo-300 px-5 py-2 rounded-full border border-indigo-800">كلية التربية النوعية</span>
+                    <span class="bg-purple-900/30 text-purple-300 px-5 py-2 rounded-full border border-purple-800">جامعة بنها</span>
+                </div>
+                <div class="mt-6 inline-block bg-slate-900 text-slate-300 px-6 py-2 rounded-xl border border-slate-700 font-mono text-base tracking-widest shadow-inner">
+                    الكود: 25180235
+                </div>
+            </div>
+
+            <!-- Big WhatsApp CTA Button at the end -->
+            <div class="mb-16">
+                <h3 class="text-xl font-bold text-slate-300 mb-6">عندك أي سؤال أو استفسار في المادة؟</h3>
+                <a href="https://wa.me/+201007753783" target="_blank" class="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#25d366] to-[#128c7e] hover:from-[#20b858] hover:to-[#0e7165] text-white font-black text-xl py-5 px-12 rounded-full transition-all transform hover:scale-105 shadow-[0_15px_30px_rgba(37,211,102,0.3)]">
+                    <span class="text-3xl">💬</span> تواصل معي عبر واتساب الآن
+                </a>
+            </div>
+
+            <div class="border-t border-slate-800/80 pt-8 text-sm text-slate-500 font-bold flex flex-col md:flex-row justify-between items-center gap-4">
+                <span>© 2026 جميع الحقوق محفوظة - مصطفى عبدالرحمن</span>
+                <span class="bg-slate-900 px-4 py-2 rounded-lg border border-slate-800">مادة مقدمة مراكز مصادر التعلم | د. هبة</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scroll Logic
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                const navHeight = 80; 
+                const y = el.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                window.scrollTo({top: y, behavior: 'smooth'});
+            }
+        }
+
+        // Initialize Chart when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            Chart.defaults.font.family = "'Cairo', sans-serif";
+            Chart.defaults.color = '#94a3b8'; 
+
+            const ctx = document.getElementById('standardsRadarChart');
+            if(ctx) {
+                new Chart(ctx.getContext('2d'), {
+                    type: 'radar',
+                    data: {
+                        labels: ['تربوي (أهداف)', 'تكنولوجي (سهولة)', 'أمني (خصوصية)', 'اقتصادي (تكلفة)', 'جمالي (تصميم)', 'تقويمي (قياس)'],
+                        datasets: [
+                            { 
+                                label: 'مستحدث تفاعلي ناجح', 
+                                data: [95, 90, 95, 80, 90, 100], 
+                                fill: true, 
+                                backgroundColor: 'rgba(99, 102, 241, 0.3)', // Indigo
+                                borderColor: '#8b5cf6', // Violet
+                                pointBackgroundColor: '#a855f7',
+                                borderWidth: 3
+                            },
+                            { 
+                                label: 'شاشة عرض تقليدية فقط', 
+                                data: [50, 80, 40, 60, 50, 20], 
+                                fill: true, 
+                                backgroundColor: 'rgba(244, 63, 94, 0.1)', // Rose
+                                borderColor: '#f43f5e',
+                                pointBackgroundColor: '#f43f5e',
+                                borderDash: [5, 5],
+                                borderWidth: 2
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true, 
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { 
+                                position: 'bottom', 
+                                labels: { color: '#e2e8f0', font: { weight: 'bold', family: "'Cairo', sans-serif" } }
+                            },
+                            tooltip: { 
+                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                                titleColor: '#f8fafc',
+                                bodyColor: '#cbd5e1',
+                                titleFont: { family: "'Cairo', sans-serif", size: 14, weight: 'bold' }, 
+                                bodyFont: { family: "'Cairo', sans-serif", size: 13 },
+                                padding: 12,
+                                cornerRadius: 8,
+                                borderColor: '#334155',
+                                borderWidth: 1
+                            }
+                        },
+                        scales: {
+                            r: {
+                                angleLines: { color: 'rgba(51, 65, 85, 0.5)' },
+                                grid: { color: 'rgba(51, 65, 85, 0.5)' },
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                                pointLabels: { 
+                                    color: '#cbd5e1', 
+                                    font: { size: 11, weight: 'bold', family: "'Cairo', sans-serif" } 
+                                },
+                                ticks: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
