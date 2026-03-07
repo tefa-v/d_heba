@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الجزء الثاني | مصادر التعلم | مصطفى عبدالرحمن (تيفا)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background-color: #f8fafc; 
+            color: #0f172a; 
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            max-width: 500px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            height: 350px; 
+            max-height: 400px; 
+        }
+        
+        /* Modern Glass UI Elements */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px -12px rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #2563eb, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af, #6b21a8);
+        }
+
+        /* Floating WhatsApp Button */
+        .float-wa {
+            position: fixed;
+            width: 65px;
+            height: 65px;
+            bottom: 40px;
+            left: 40px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 35px;
+            box-shadow: 0px 10px 25px rgba(37, 211, 102, 0.5);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .float-wa:hover {
+            transform: scale(1.15) rotate(-10deg);
+        }
+
+        /* Timeline specific */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 50%;
+            width: 4px;
+            background: linear-gradient(to bottom, #3b82f6, #a855f7, #10b981);
+            transform: translateX(50%);
+            border-radius: 4px;
+        }
+        @media (max-width: 768px) {
+            .timeline-container::before {
+                right: 20px;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 antialiased selection:bg-purple-200 selection:text-purple-900">
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/+201007753783" target="_blank" class="float-wa" title="تواصل مع تيفا">💬</a>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-xl border-b border-slate-200/50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex flex-col">
+                    <span class="text-2xl font-black tracking-tight gradient-text">تكنولوجيا التعليم</span>
+                    <span class="text-xs font-bold text-slate-500">الجزء الثاني | إعداد: مصطفى عبدالرحمن (تيفا)</span>
+                </div>
+                <div class="hidden md:flex space-x-8 space-x-reverse items-center">
+                    <button onclick="scrollToSection('objectives')" class="text-slate-600 hover:text-blue-600 font-bold transition">الأهداف الاستراتيجية</button>
+                    <button onclick="scrollToSection('classifications')" class="text-slate-600 hover:text-blue-600 font-bold transition">التصنيفات</button>
+                    <button onclick="scrollToSection('functional-use')" class="text-slate-600 hover:text-blue-600 font-bold transition">الاستخدام الوظيفي</button>
+                    <div class="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-900 px-4 py-2 rounded-full text-sm font-black border border-blue-200 shadow-sm">
+                        كود: 25180235
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-slate-900 text-white py-16 border-b-4 border-purple-500 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-30"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="md:w-2/3">
+                <div class="inline-block bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-sm font-bold mb-4 border border-white/20 text-blue-200">
+                    مرحباً بكم في الجزء الثاني والأهم 💡
+                </div>
+                <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight">
+                    استكمال التحضير: <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">التفاصيل العلمية لمصادر التعلم</span>
+                </h1>
+                <p class="text-slate-300 font-semibold text-lg leading-relaxed max-w-2xl">
+                    يا شباب دفعتي، عشان نكون فاهمين تخصصنا صح مش مجرد حافظين كلمتين للامتحان، الجزء ده بيشرح "فلسفة" تكنولوجيا التعليم. هنتعلم إحنا ليه بنصمم المصادر دي، إيه هي أنواعها بالتفصيل، وإزاي نوظفها جوة السكشن باحترافية زي ما د. هبة بتعلمنا.
+                </p>
+            </div>
+            <div class="md:w-1/3 flex justify-end">
+                <a href="index.html" class="bg-white/10 hover:bg-white/20 backdrop-blur-lg text-white font-bold py-4 px-8 rounded-2xl border border-white/20 transition-all flex flex-col items-center gap-2 group shadow-xl">
+                    <span class="text-3xl group-hover:-translate-x-2 transition-transform">🔙</span> 
+                    <span>العودة للأساسيات</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1/ أهداف مصادر التعلم -->
+    <section id="objectives" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="absolute top-20 right-0 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -z-10"></div>
+        
+        <div class="text-center max-w-4xl mx-auto mb-16">
+            <h2 class="text-4xl font-black text-slate-900 mb-6">٣/ إحنا بنركز على إيه؟ <span class="gradient-text">(أهداف مصادر التعلم)</span></h2>
+            <p class="text-slate-600 text-xl font-bold leading-relaxed">
+                التكنولوجيا مش هدف في حد ذاتها، هي "وسيلة". إحنا بنستخدم الشاشات والمحاكاة والبرامج عشان نحقق أهداف تربوية عميقة بتخدم عقل الطالب ومستقبله. ركزوا معايا في الأهداف الستة دي:
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Objective 1 -->
+            <div class="glass-card p-8 rounded-3xl border-t-4 border-blue-500">
+                <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">🧠</div>
+                <h3 class="font-black text-xl mb-3 text-slate-800">١. تنمية التفكير وحل المشكلات</h3>
+                <p class="text-slate-600 font-medium text-sm leading-relaxed">
+                    نقل الطالب من مرحلة "الحفظ والتلقين" لمرحلة التفكير النقدي. لما الطالب يشوف تجربة تفاعلية بيضطر يحلل، يستنتج، ويربط الأسباب بالنتائج عشان يوصل للحل بنفسه.
+                </p>
+            </div>
+            <!-- Objective 2 -->
+            <div class="glass-card p-8 rounded-3xl border-t-4 border-purple-500">
+                <div class="w-16 h-16 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">🌍</div>
+                <h3 class="font-black text-xl mb-3 text-slate-800">٢. ربط النظري بالواقع العملي</h3>
+                <p class="text-slate-600 font-medium text-sm leading-relaxed">
+                    التعليم الأكاديمي ممكن يكون جاف. مصادر التعلم (زي الواقع الافتراضي VR أو الأفلام الوثائقية) بتنقل المصنع، المعمل، أو الفضاء الخارجي لحد جوة الفصل عشان الطالب يحس بقيمة اللي بيدرسه.
+                </p>
+            </div>
+            <!-- Objective 3 -->
+            <div class="glass-card p-8 rounded-3xl border-t-4 border-emerald-500">
+                <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">🎯</div>
+                <h3 class="font-black text-xl mb-3 text-slate-800">٣. مراعاة الفروق الفردية</h3>
+                <p class="text-slate-600 font-medium text-sm leading-relaxed">
+                    مفيش طالب زي التاني. تنوع المصادر بيسمح بتفريد التعليم (Individualized Learning). الطالب البصري بيتعلم من الفيديو، والسمعي من البودكاست، والحركي من الماكيت أو الحقيبة التعليمية.
+                </p>
+            </div>
+            <!-- Objective 4 -->
+            <div class="glass-card p-8 rounded-3xl border-t-4 border-amber-500">
+                <div class="w-16 h-16 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">🛠️</div>
+                <h3 class="font-black text-xl mb-3 text-slate-800">٤. إكساب المهارات الأدائية</h3>
+                <p class="text-slate-600 font-medium text-sm leading-relaxed">
+                    النظري وحده لا يكفي. المصادر العملية بتوفر بيئة آمنة للممارسة. زي استخدام برامج المحاكاة الطبية اللي بتسمح للطالب يغلط ويتعلم من غير ما يتسبب في كارثة حقيقية!
+                </p>
+            </div>
+            <!-- Objective 5 -->
+            <div class="glass-card p-8 rounded-3xl border-t-4 border-rose-500">
+                <div class="w-16 h-16 bg-rose-50 text-rose-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">🚀</div>
+                <h3 class="font-black text-xl mb-3 text-slate-800">٥. إثارة الدافعية والتشويق</h3>
+                <p class="text-slate-600 font-medium text-sm leading-relaxed">
+                    كسر روتين السبورة والطباشير! استخدام الألعاب التعليمية والوسائط المتعددة بيخلي بيئة التعلم جذابة وممتعة، فبيزيد انتباه الطالب وتركيزه لفترة أطول بدون ملل.
+                </p>
+            </div>
+            <!-- Objective 6 -->
+            <div class="glass-card p-8 rounded-3xl border-t-4 border-cyan-500">
+                <div class="w-16 h-16 bg-cyan-50 text-cyan-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">🔄</div>
+                <h3 class="font-black text-xl mb-3 text-slate-800">٦. تشجيع التعلم المستمر والذاتي</h3>
+                <p class="text-slate-600 font-medium text-sm leading-relaxed">
+                    توفير المصادر في أي وقت وأي مكان (عبر المنصات أو الحقائب المستقلة) بيعلم الطالب إزاي يعتمد على نفسه في البحث عن المعلومة، ودي مهارة هتنفعه طول عمره.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2/ تصنيفات مصادر التعلم -->
+    <section id="classifications" class="py-24 bg-slate-900 border-y border-slate-800 relative overflow-hidden">
+        <!-- Abstract Dark Mode Background -->
+        <div class="absolute -left-40 top-20 w-96 h-96 bg-purple-900 rounded-full mix-blend-screen filter blur-[120px] opacity-40"></div>
+        <div class="absolute right-0 bottom-0 w-96 h-96 bg-blue-900 rounded-full mix-blend-screen filter blur-[120px] opacity-40"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto mb-16">
+                <h2 class="text-4xl font-black text-white mb-6">٤/ التصنيفات الشاملة <span class="text-blue-400">(أدوات الأخصائي المحترف)</span></h2>
+                <p class="text-slate-400 text-xl font-bold leading-relaxed">
+                    مفيش مهندس بيشتغل من غير ما يعرف أنواع العِدة اللي في شنطته. علماء تكنولوجيا التعليم قسموا المصادر لعدة تصنيفات عشان نقدر نختار الأنسب لكل موقف تعليمي. تعالوا نفهمها بالتفصيل:
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Classification Cards -->
+                <div class="space-y-6">
+                    <!-- Class 1 -->
+                    <div class="bg-slate-800/80 backdrop-blur-xl p-6 rounded-3xl border border-slate-700 hover:border-blue-500 transition-all group">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="bg-blue-500/20 text-blue-400 p-3 rounded-2xl text-2xl group-hover:scale-110 transition-transform">👁️👂</div>
+                            <h4 class="font-black text-xl text-white">١. التصنيف حسب الحواس (الكلاسيكي)</h4>
+                        </div>
+                        <ul class="space-y-3 text-slate-400 font-medium text-sm pr-2">
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-500">●</span> 
+                                <span><strong class="text-slate-200">مصادر بصرية:</strong> بتعتمد على حاسة البصر فقط (الصور، الخرائط، الرسوم البيانية، واللوحات التعليمية).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-500">●</span> 
+                                <span><strong class="text-slate-200">مصادر سمعية:</strong> بتعتمد على حاسة السمع (الإذاعة المدرسية، التسجيلات الصوتية، والبودكاست التعليمي).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-500">●</span> 
+                                <span><strong class="text-slate-200">مصادر سمعبصرية:</strong> بتدمج الصوتين والصورة معاً لزيادة التأثير (الأفلام الوثائقية، مقاطع الفيديو).</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Class 2 -->
+                    <div class="bg-gradient-to-br from-purple-900/50 to-blue-900/50 backdrop-blur-xl p-6 rounded-3xl border-2 border-purple-500/50 hover:border-purple-400 transition-all shadow-[0_0_30px_rgba(168,85,247,0.15)] group relative">
+                        <div class="absolute -top-4 left-6 bg-purple-500 text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg">التصنيف الأهم في تخصصنا 🔥</div>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="bg-purple-500/20 text-purple-300 p-3 rounded-2xl text-2xl group-hover:scale-110 transition-transform">🎮</div>
+                            <h4 class="font-black text-xl text-white">٢. التصنيف حسب درجة التفاعل</h4>
+                        </div>
+                        <ul class="space-y-3 text-purple-200/80 font-medium text-sm pr-2">
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-400">●</span> 
+                                <span><strong class="text-white">مصادر العرض (السلبية):</strong> الطالب مجرد متلقي يتلقى المعلومة دون تدخل (زي مشاهدة عرض تقديمي PowerPoint تقليدي أو قراءة ملف PDF).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-400">●</span> 
+                                <span><strong class="text-white">المصادر التفاعلية (النشطة):</strong> هنا الطالب هو بطل القصة! يتفاعل مع المحتوى، يختار المسارات، ويحصل على تغذية راجعة (زي برامج المحاكاة، الألعاب التعليمية، والواقع المعزز AR).</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Class 3 -->
+                    <div class="bg-slate-800/80 backdrop-blur-xl p-6 rounded-3xl border border-slate-700 hover:border-emerald-500 transition-all group">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="bg-emerald-500/20 text-emerald-400 p-3 rounded-2xl text-2xl group-hover:scale-110 transition-transform">🌿🏭</div>
+                            <h4 class="font-black text-xl text-white">٣. التصنيف حسب طبيعة المصدر</h4>
+                        </div>
+                        <ul class="space-y-3 text-slate-400 font-medium text-sm pr-2">
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-500">●</span> 
+                                <span><strong class="text-slate-200">مواد تعليمية جاهزة (أو طبيعية):</strong> أشياء من البيئة الواقعية نستخدمها كما هي دون تعديل (زي العينات الصخرية، أوراق النباتات، أو زيارة ميدانية لمتحف).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-500">●</span> 
+                                <span><strong class="text-slate-200">مواد مصممة (مُصنعة):</strong> مواد تم هندستها وإنتاجها خصيصاً لأغراض تعليمية (زي الحقائب التعليمية، الماكيتات البلاستيكية، والبرمجيات).</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Interactive Side: Chart & Info -->
+                <div class="flex flex-col gap-6">
+                    <!-- Added Class 4 as a feature card -->
+                    <div class="bg-slate-800/50 backdrop-blur-sm p-6 rounded-3xl border border-slate-700">
+                        <h4 class="font-black text-lg text-amber-400 mb-3 flex items-center gap-2">
+                            <span>👥</span> ٤. التصنيف حسب عدد المستفيدين
+                        </h4>
+                        <div class="flex flex-wrap gap-2 text-sm font-bold">
+                            <span class="bg-slate-700 text-slate-300 px-3 py-1 rounded-lg">فردي (تطبيق موبايل)</span>
+                            <span class="bg-slate-700 text-slate-300 px-3 py-1 rounded-lg">مجموعات صغيرة (لعبة لوحية)</span>
+                            <span class="bg-slate-700 text-slate-300 px-3 py-1 rounded-lg">جماهيري (دائرة تليفزيونية مغلقة)</span>
+                        </div>
+                    </div>
+
+                    <!-- Chart Card -->
+                    <div class="bg-slate-800 p-6 md:p-8 rounded-3xl border border-slate-700 shadow-2xl flex-1 flex flex-col">
+                        <h3 class="font-black text-center mb-4 text-white text-xl">دليل الأخصائي: مخروط الخبرة (Edgar Dale)</h3>
+                        <p class="text-center text-sm text-slate-400 mb-6 font-semibold px-4">
+                            هذا الرسم يوضح لماذا نعطي الأولوية "للمصادر التفاعلية". كلما زادت مشاركة الطالب ونزوله لقاعدة المخروط (الممارسة العملية)، زاد معدل احتفاظه بالمعلومة.
+                        </p>
+                        <div class="chart-container flex-1 min-h-[300px]">
+                            <canvas id="retentionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3/ الاستخدام الوظيفي وخصائصه -->
+    <section id="functional-use" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div class="text-center max-w-4xl mx-auto mb-20 relative z-10">
+            <h2 class="text-4xl font-black text-slate-900 mb-6">٥/ التنفيذ على أرض الواقع <span class="gradient-text">(الاستخدام الوظيفي)</span></h2>
+            <p class="text-slate-600 text-xl font-bold leading-relaxed">
+                الاستخدام الوظيفي معناه "التوظيف التربوي السليم". المصدر مش بيتحط بشكل عشوائي عشان نضيع وقت أو نريح المدرس! ده ليه "مراحل" واضحة جوة السكشن، وليه "خصائص" لازم تتوفر عشان نعتبره ناجح.
+            </p>
+        </div>
+
+        <!-- Section A: The Timeline of Usage -->
+        <div class="mb-24 relative z-10">
+            <h3 class="text-3xl font-black mb-16 text-center text-blue-900 bg-blue-50 py-4 px-8 rounded-full inline-block mx-auto max-w-fit shadow-sm">
+                مراحل التوظيف الزمني داخل الفصل او السكشن العملي ⏱️
+            </h3>
+            
+            <div class="relative timeline-container max-w-5xl mx-auto">
+                
+                <!-- Stage 1 -->
+                <div class="relative w-full md:w-1/2 md:pr-12 md:ml-auto mb-16 text-right md:text-left clear-both group">
+                    <div class="absolute right-4 md:right-[-28px] top-6 w-14 h-14 bg-blue-500 rounded-full border-4 border-white shadow-xl flex items-center justify-center text-white font-black text-2xl z-10 group-hover:scale-110 transition-transform">١</div>
+                    <div class="glass-card p-8 rounded-3xl border-r-4 md:border-r-0 md:border-l-4 border-blue-500 mr-16 md:mr-0 text-right">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">🧊</span>
+                            <h4 class="font-black text-2xl text-slate-800">مرحلة التهيئة (كسر الملل ببدايه مشوقه)</h4>
+                        </div>
+                        <p class="text-slate-600 font-semibold leading-relaxed mb-4">
+                            <span class="text-blue-600 font-bold">التوقيت:</span> أول 5 دقائق.<br>
+                            <span class="text-blue-600 font-bold">الهدف:</span> جذب الانتباه، إثارة الفضول، وعمل "عصف ذهني" سريع.<br>
+                            <span class="text-blue-600 font-bold">مثال:</span> عرض مقطع فيديو قصير صادم، أو عرض مجسم غريب وسؤال الطلاب "تفتكروا إيه ده؟".
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stage 2 -->
+                <div class="relative w-full md:w-1/2 md:pl-12 md:mr-auto mb-16 text-right clear-both group">
+                    <div class="absolute right-4 md:left-[-28px] md:right-auto top-6 w-14 h-14 bg-purple-500 rounded-full border-4 border-white shadow-xl flex items-center justify-center text-white font-black text-2xl z-10 group-hover:scale-110 transition-transform">٢</div>
+                    <div class="glass-card p-8 rounded-3xl border-r-4 border-purple-500 mr-16 md:mr-0">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">📖</span>
+                            <h4 class="font-black text-2xl text-slate-800">مرحلة عمق الشرح (العرض الأساسي)</h4>
+                        </div>
+                        <p class="text-slate-600 font-semibold leading-relaxed mb-4">
+                            <span class="text-purple-600 font-bold">التوقيت:</span> منتصف الحصة.<br>
+                            <span class="text-purple-600 font-bold">الهدف:</span> تقديم المحتوى المعرفي والمهاري الأساسي.<br>
+                            <span class="text-purple-600 font-bold">مثال:</span> استخدام عرض تفاعلي أو برنامج محاكاة لشرح كيفية عمل الدورة الدموية، حيث يتولى المصدر مهمة الشرح ويكون المعلم موجهاً.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stage 3 -->
+                <div class="relative w-full md:w-1/2 md:pr-12 md:ml-auto mb-16 text-right md:text-left clear-both group">
+                    <div class="absolute right-4 md:right-[-28px] top-6 w-14 h-14 bg-emerald-500 rounded-full border-4 border-white shadow-xl flex items-center justify-center text-white font-black text-2xl z-10 group-hover:scale-110 transition-transform">٣</div>
+                    <div class="glass-card p-8 rounded-3xl border-r-4 md:border-r-0 md:border-l-4 border-emerald-500 mr-16 md:mr-0 text-right">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">⚙️</span>
+                            <h4 class="font-black text-2xl text-slate-800">مرحلة التطبيق والتدريب</h4>
+                        </div>
+                        <p class="text-slate-600 font-semibold leading-relaxed mb-4">
+                            <span class="text-emerald-600 font-bold">التوقيت:</span> بعد الشرح مباشرة.<br>
+                            <span class="text-emerald-600 font-bold">الهدف:</span> تثبيت المعلومة وتحويلها لمهارة.<br>
+                            <span class="text-emerald-600 font-bold">مثال:</span> توزيع أجزاء الحقيبة التعليمية على الطلاب ليقوموا بتركيب الدائرة الكهربائية بأنفسهم بناءً على ما شاهدوه.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stage 4 -->
+                <div class="relative w-full md:w-1/2 md:pl-12 md:mr-auto mb-16 text-right clear-both group">
+                    <div class="absolute right-4 md:left-[-28px] md:right-auto top-6 w-14 h-14 bg-amber-500 rounded-full border-4 border-white shadow-xl flex items-center justify-center text-white font-black text-2xl z-10 group-hover:scale-110 transition-transform">٤</div>
+                    <div class="glass-card p-8 rounded-3xl border-r-4 border-amber-500 mr-16 md:mr-0">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">📊</span>
+                            <h4 class="font-black text-2xl text-slate-800">مرحلة التقويم والمراجعة</h4>
+                        </div>
+                        <p class="text-slate-600 font-semibold leading-relaxed mb-4">
+                            <span class="text-amber-600 font-bold">التوقيت:</span> نهاية الحصة.<br>
+                            <span class="text-amber-600 font-bold">الهدف:</span> قياس مدى تحقق الأهداف التعليمية (كشف الحساب).<br>
+                            <span class="text-amber-600 font-bold">مثال:</span> إجراء اختبار إلكتروني سريع، أو استخدام ألعاب الكويزات (مثل Kahoot) لمعرفة من استوعب الدرس.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section B: Characteristics (روشتة د. هبة) -->
+        <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[3rem] p-8 md:p-14 shadow-2xl relative z-10 border border-slate-700">
+            <h3 class="text-3xl md:text-4xl font-black mb-12 text-center text-white">
+                خصائص الاستخدام الوظيفي الفعّال <br> 
+                <span class="text-amber-400 text-2xl mt-4 inline-block px-6 py-2 bg-slate-800 rounded-full border border-amber-500/30">الخلاصة للاحتراف😍</span>
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-slate-300">
+                
+                <!-- Characteristic 1 -->
+                <div class="bg-slate-800/80 p-6 rounded-3xl border border-slate-600 hover:border-blue-400 hover:bg-slate-800 transition-colors shadow-lg">
+                    <div class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-xl flex items-center justify-center font-black text-2xl mb-4">١</div>
+                    <h4 class="text-white text-xl font-bold mb-3">التكامل (Integration)</h4>
+                    <p class="text-sm font-medium leading-relaxed">المصدر ليس كياناً منفصلاً ولا بديلاً للمعلم. يجب أن يتكامل الشرح اللفظي للمعلم مع العرض المرئي للمصدر بصورة متناغمة (لا يعملان في جزر منعزلة).</p>
+                </div>
+
+                <!-- Characteristic 2 -->
+                <div class="bg-slate-800/80 p-6 rounded-3xl border border-slate-600 hover:border-purple-400 hover:bg-slate-800 transition-colors shadow-lg">
+                    <div class="w-12 h-12 bg-purple-500/20 text-purple-400 rounded-xl flex items-center justify-center font-black text-2xl mb-4">٢</div>
+                    <h4 class="text-white text-xl font-bold mb-3">الارتباط بالهدف (Purposeful)</h4>
+                    <p class="text-sm font-medium leading-relaxed">استخدام التكنولوجيا من أجل التكنولوجيا خطأ! كل دقيقة يُستخدم فيها المصدر يجب أن تكون موجهة لتحقيق هدف سلوكي محدد مسبقاً في التحضير.</p>
+                </div>
+
+                <!-- Characteristic 3 -->
+                <div class="bg-slate-800/80 p-6 rounded-3xl border border-slate-600 hover:border-emerald-400 hover:bg-slate-800 transition-colors shadow-lg">
+                    <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center font-black text-2xl mb-4">٣</div>
+                    <h4 class="text-white text-xl font-bold mb-3">التسلسل المنطقي</h4>
+                    <p class="text-sm font-medium leading-relaxed">تقديم المصدر في الوقت المناسب سيكولوجياً وتعليمياً. لا يصح عرض فيديو المراجعة الشاملة قبل شرح الأساسيات، يجب احترام تدرج عقل الطالب.</p>
+                </div>
+
+                <!-- Characteristic 4 -->
+                <div class="bg-slate-800/80 p-6 rounded-3xl border border-slate-600 hover:border-amber-400 hover:bg-slate-800 transition-colors shadow-lg">
+                    <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center font-black text-2xl mb-4">٤</div>
+                    <h4 class="text-white text-xl font-bold mb-3">ملاءمة خصائص المتعلمين</h4>
+                    <p class="text-sm font-medium leading-relaxed">أن يكون المصدر مناسباً للعمق المعرفي، واللغة، والمرحلة العمرية. (طريقة عرض المعلومة لطالب ابتدائي تختلف جذرياً عن طالب جامعي).</p>
+                </div>
+
+                <!-- Characteristic 5 -->
+                <div class="bg-slate-800/80 p-6 rounded-3xl border border-slate-600 hover:border-rose-400 hover:bg-slate-800 transition-colors shadow-lg">
+                    <div class="w-12 h-12 bg-rose-500/20 text-rose-400 rounded-xl flex items-center justify-center font-black text-2xl mb-4">٥</div>
+                    <h4 class="text-white text-xl font-bold mb-3">القابلية للقياس والتقويم</h4>
+                    <p class="text-sm font-medium leading-relaxed">يجب أن نكون قادرين على اختبار الطالب فيما تعلمه من هذا المصدر، لنقيس مدى فعاليته (هل نجح المصدر في توصيل المعلومة أم يحتاج لتطوير؟).</p>
+                </div>
+
+                <!-- Characteristic 6 -->
+                <div class="bg-slate-800/80 p-6 rounded-3xl border border-slate-600 hover:border-cyan-400 hover:bg-slate-800 transition-colors shadow-lg">
+                    <div class="w-12 h-12 bg-cyan-500/20 text-cyan-400 rounded-xl flex items-center justify-center font-black text-2xl mb-4">٦</div>
+                    <h4 class="text-white text-xl font-bold mb-3">الاقتصادية والأمان</h4>
+                    <p class="text-sm font-medium leading-relaxed">يُفضل استخدام المصدر الذي يعطي أعلى فائدة بأقل تكلفة، وأن يوفر عنصر الأمان (كاستخدام المحاكاة بدلاً من التجارب الكيميائية الخطيرة فعلياً).</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </section>
+    <section class="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <a href="part3.html" class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-black py-5 px-12 rounded-full transition-all transform hover:scale-105 shadow-[0_10px_25px_rgba(37,99,235,0.3)] text-xl border-2 border-white/20">
+            <span>الــجزء التالت (التطور الكامل)</span>
+            <span class="text-2xl">➡️</span>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-20 pb-10 border-t-[10px] border-blue-600 relative overflow-hidden mt-16">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-20"></div>
+        <div class="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-slate-950 to-transparent"></div>
+        
+        <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
+                كده نكون غطينا كل التفاصيل العلمية يا شباب! 🎉
+            </h2>
+            <p class="text-slate-300 mb-12 leading-relaxed font-semibold text-lg max-w-3xl mx-auto">
+                أتمنى يكون التلخيص التفاعلي ده لمّ الدنيا وسهل عليكم فهم المادة بعمق. افتكروا دايماً إن تخصصنا ده هو المُحرك الأساسي لشكل التعليم في المستقبل، وإحنا المهندسين اللي هنبنيه. ذاكروا بذكاء، وبفهم، مش بمجرد حفظ!
+            </p>
+            
+            <div class="bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 p-8 rounded-[3rem] max-w-2xl mx-auto mb-12 shadow-2xl">
+                <p class="text-slate-400 text-sm font-bold mb-3 tracking-wider">تم التصميم والتطوير والتنسيق بواسطة:</p>
+                <h3 class="text-3xl font-black text-white mb-4">مصطفى عبدالرحمن صلاح (تيفا)</h3>
+                <div class="flex flex-wrap justify-center items-center gap-4 text-sm font-bold mt-6">
+                    <span class="bg-blue-900/40 text-blue-300 px-5 py-2.5 rounded-full border border-blue-700/50 flex items-center gap-2">
+                        <span>🏛️</span> كلية التربية النوعية
+                    </span>
+                    <span class="bg-purple-900/40 text-purple-300 px-5 py-2.5 rounded-full border border-purple-700/50 flex items-center gap-2">
+                        <span>🎓</span> جامعة بنها
+                    </span>
+                </div>
+                <div class="mt-6 inline-block bg-slate-950/50 text-slate-300 px-6 py-3 rounded-xl border border-slate-700 font-mono text-base tracking-widest shadow-inner">
+                    كود جامعي: 25180235
+                </div>
+            </div>
+
+            <div class="flex justify-center gap-4 mb-12">
+                <a href="https://wa.me/+201007753783" target="_blank" class="bg-gradient-to-r from-[#25d366] to-[#128c7e] hover:from-[#20b858] hover:to-[#0e7165] text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 flex items-center gap-3 shadow-[0_10px_25px_rgba(37,211,102,0.3)] text-lg">
+                    <span class="text-2xl">💬</span> عندك استفسار؟ ابعتلي واتساب
+                </a>
+            </div>
+
+            <div class="border-t border-slate-800/80 pt-8 text-sm text-slate-500 font-bold flex flex-col md:flex-row justify-between items-center gap-4">
+                <span>© 2026 جميع الحقوق محفوظة - تصميم وبرمجة: مصطفى عبدالرحمن</span>
+                <span class="bg-slate-800 px-4 py-2 rounded-lg">مادة مقدمة مراكز مصادر التعلم | د. هبة</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scroll Logic
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                const navHeight = 80; // Height of the fixed navbar
+                const y = el.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
+                window.scrollTo({top: y, behavior: 'smooth'});
+            }
+        }
+
+        // Initialize Charts when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set global font
+            Chart.defaults.font.family = "'Cairo', sans-serif";
+            
+            // Doughnut Chart for Cone of Experience (Retention Rate)
+            const ctxRetention = document.getElementById('retentionChart').getContext('2d');
+            
+            new Chart(ctxRetention, {
+                type: 'doughnut',
+                data: {
+                    labels: [
+                        'الممارسة العملية (تفاعلي مُباشر)', 
+                        'المشاركة في نقاش أو تقديم عرض', 
+                        'المشاهدة والاستماع (فيديو/عروض)', 
+                        'القراءة فقط (نص ثابت)'
+                    ],
+                    datasets: [{
+                        data: [90, 70, 50, 10], // Approximate retention rates based on Edgar Dale
+                        backgroundColor: [
+                            '#8b5cf6', // Purple 500 (Doing) - Most effective
+                            '#3b82f6', // Blue 500 (Discussing)
+                            '#10b981', // Emerald 500 (Seeing/Hearing)
+                            '#64748b'  // Slate 500 (Reading) - Least effective
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#1e293b', // Match dark bg
+                        hoverOffset: 15
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '65%',
+                    plugins: {
+                        legend: { 
+                            position: 'bottom', 
+                            labels: { 
+                                font: { weight: 'bold', size: 12, family: "'Cairo', sans-serif" }, 
+                                padding: 15,
+                                color: '#cbd5e1' // slate-300
+                            } 
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                            titleColor: '#0f172a',
+                            bodyColor: '#334155',
+                            titleFont: { size: 14, weight: 'bold', family: "'Cairo', sans-serif" },
+                            bodyFont: { size: 15, weight: 'bold', family: "'Cairo', sans-serif" },
+                            padding: 15,
+                            cornerRadius: 12,
+                            borderColor: '#e2e8f0',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function(context) {
+                                    return ' معدل تذكر الطالب للمعلومة: ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true,
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                },
+                plugins: [{
+                    id: 'centerTextPlugin',
+                    beforeDraw: function(chart) {
+                        if (chart.config.type !== 'doughnut') return;
+                        var width = chart.width, height = chart.height, ctx = chart.ctx;
+                        ctx.restore();
+                        var fontSize = (height / 140).toFixed(2);
+                        ctx.font = "900 " + fontSize + "em 'Cairo', sans-serif";
+                        ctx.textBaseline = "middle";
+                        ctx.fillStyle = "#f8fafc"; // Light text for dark center
+                        
+                        var text = "مخروط",
+                            textX = Math.round((width - ctx.measureText(text).width) / 2),
+                            textY = height / 2 - 18;
+                        ctx.fillText(text, textX, textY);
+                        
+                        var text2 = "الخبرة",
+                            textX2 = Math.round((width - ctx.measureText(text2).width) / 2),
+                            textY2 = height / 2 + 18;
+                        ctx.fillText(text2, textX2, textY2);
+                        ctx.save();
+                    }
+                }]
+            });
+        });
+    </script>
+</body>
+</html>
